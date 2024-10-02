@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>छात्र शिकायत फॉर्म</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6">
+        <h1 class="text-2xl font-bold mb-4">छात्र शिकायत फॉर्म</h1>
+        <form id="complaintForm" class="space-y-4">
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700">छात्र का नाम</label>
+                <input type="text" id="name" name="name" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+            </div>
+            <div>
+                <label for="college" class="block text-sm font-medium text-gray-700">कॉलेज का नाम</label>
+                <input type="text" id="college" name="college" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">संदेश पूर्वावलोकन:</label>
+                <div id="messagePreview" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 whitespace-pre-wrap"></div>
+            </div>
+            <div>
+                <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    शिकायत दर्ज करें
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function updateMessagePreview() {
+            const name = document.getElementById('name').value || '[छात्र का नाम]';
+            const college = document.getElementById('college').value || '[कॉलेज का नाम]';
+            const messageTemplate = `विषय: लंबित पुनर्मूल्यांकन परिणाम और क्रेडिट आवंटन समस्या पर तत्काल कार्रवाई की मांग
+
+सम्मानित विश्वविद्यालय अधिकारीगण एवं शिक्षाविद्गण,
+
+हम राजस्थान विश्वविद्यालय के छात्रों की ओर से यह ईमेल लिख रहे हैं, जो इस समय कई गंभीर समस्याओं का सामना कर रहे हैं, जो हमारे शैक्षणिक भविष्य पर प्रतिकूल प्रभाव डाल रही हैं।और इन मुद्दों पर त्वरित ध्यान देने की आवश्यकता है:
+
+<strong>सेमेस्टर 1 पुनर्मूल्यांकन परिणाम:</strong> विश्वविद्यालय ने अभी तक सेमेस्टर 1 के पुनर्मूल्यांकन के परिणाम जारी नहीं किए हैं, जिससे छात्रों को यह स्पष्ट नहीं हो पा रहा है कि वे वर्ष उत्तीर्ण करेंगे या नहीं। अन्य विश्वविद्यालयों में प्रवेश की अंतिम तिथियां समाप्त होने वाली हैं, और यदि पुनर्मूल्यांकन परिणाम जल्द जारी नहीं होते, तो छात्रों को अनिच्छा से वही कोर्स दोबारा करना पड़ेगा।
+
+<strong>क्रेडिट आवंटन समस्या:</strong> विश्वविद्यालय द्वारा कहा गया है कि प्रत्येक 25 अंकों पर 1 क्रेडिट दिया जाएगा, लेकिन कई छात्रों को कोर विषयों में बैक होने पर 25 से अधिक अंक प्राप्त करने के बावजूद पर भी क्रेडिट नहीं दिया गया। यह प्रणाली छात्रों के लिए असमंजस और अन्याय पैदा कर रही है, और इसमें सुधार की आवश्यकता है।
+
+<strong>हमारी माँगें:</strong>
+1. सेमेस्टर 1 के पुनर्मूल्यांकन परिणाम तुरंत, एक सप्ताह के भीतर जारी किए जाएं, ताकि छात्र अपने भविष्य के शैक्षणिक निर्णय ले सकें।
+2. जिन छात्रों को बैक मिला है, उन्हें भी उनके (BACK विषयों) प्राप्त अंकों के आधार पर क्रेडिट पॉइंट दिए जाएं, ताकि क्रेडिट प्रणाली निष्पक्ष और पारदर्शी हो।
+
+हमें आशा है कि विश्वविद्यालय छात्रों के भविष्य को ध्यान में रखते हुए इन मुद्दों पर शीघ्र कार्रवाई करेगा।
+
+धन्यवाद,
+${name}
+${college}
+राजस्थान विश्वविद्यालय`;
+
+            document.getElementById('messagePreview').innerHTML = messageTemplate;
+        }
+
+        document.getElementById('name').addEventListener('input', updateMessagePreview);
+        document.getElementById('college').addEventListener('input', updateMessagePreview);
+
+        updateMessagePreview(); // Initial call to populate the preview
+
+        document.getElementById('complaintForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const college = document.getElementById('college').value;
+            
+            const to = 'vcuorj@gmail.com, sanjeevsunita@gmail.com';
+            const cc = 'shalini.jain@uniraj.ac.in, drshalinijainshah@gmail.com, shail2405@gmail.com, drguptamanisha@uniraj.ac.in';
+            const bcc = 'guptaniilima@gmail.com, gupta_neelima@uniraj.ac.in, gautam01@gmail.com, kuldeepdhankad@gmail.com, sharma.gopal@hotmail.com';
+            const subject = 'लंबित पुनर्मूल्यांकन परिणाम और क्रेडिट आवंटन समस्या पर तत्काल कार्रवाई की मांग';
+            const body = document.getElementById('messagePreview').innerText;
+
+            const mailtoLink = `mailto:${to}?cc=${cc}&bcc=${bcc}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.location.href = mailtoLink;
+        });
+    </script>
+</body>
+</html>
